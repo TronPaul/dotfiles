@@ -14,6 +14,7 @@ if [ -x "$(command -v python3)" ]; then
   fi
   echo Installing or upgrading packages
   pip install -q --user pew && echo Installed pew
+  pip install -q --user powerline-status && echo Installed powerline
 else
   echo No python3 interpreter. Profound ☹
 fi

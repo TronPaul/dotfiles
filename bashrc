@@ -63,5 +63,14 @@ if ! shopt -oq posix; then
   fi
 fi
 
+if [ -x $(command -v powerline-daemon) ]; then
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  export POWERLINE_HOME="$(find $HOME/.local -name powerline -type d -path '*/site-packages/powerline')"
+  powerline_bindings_path="$POWERLINE_HOME/bindings/bash/powerline.sh"
+  . "$powerline_bindings_path"
+fi
+
 export PATH="$PATH:$HOME/.local/bin"
 export EDITOR="vim"
