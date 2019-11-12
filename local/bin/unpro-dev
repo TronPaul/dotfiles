@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-temp="$(mktemp)"
+temp="$(mktemp -d)"
 
 if [ -x "$(command -v python3)" ]; then
   pip_path="$(command -v pip)"
-  if [ -z "$pip_path" ] || [ ! -x "$pip_path" ]; then
+  if [ -z "$pip_path" ] || [ ! -x "$pip_path" ] || "$pip_path" -V | grep -qv '(python 3.[0-9]\+)'; then
     echo Installing pip
     pip_installer_path="$temp/get-pip.py"
     curl https://bootstrap.pypa.io/get-pip.py -o "$pip_installer_path"
-    python "$pip_installer_path" --user
-  elif [ "$pip_path" != "$HOME/.local/bin/pip" ] || "$pip_path" -V | grep -qv '(python 3.[0-9]\+)'; then
+    python3 "$pip_installer_path" --user
+  elif [ "$pip_path" != "$HOME/.local/bin/pip" ]; then
     echo Installing pip to home directory
     "$pip_path" install --user --python-version 3 pip
   fi

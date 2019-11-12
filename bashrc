@@ -63,6 +63,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export PATH="$PATH:$HOME/.local/bin"
+
 if [ -x $(command -v powerline-daemon) ]; then
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
@@ -72,5 +74,4 @@ if [ -x $(command -v powerline-daemon) ]; then
   . "$powerline_bindings_path"
 fi
 
-export PATH="$PATH:$HOME/.local/bin"
 export EDITOR="vim"
